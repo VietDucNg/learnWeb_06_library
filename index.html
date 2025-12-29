@@ -4,7 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title></title>
+    <title>Book library</title>
+    <!-- link font awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <!-- link my css -->
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/backbone.css" />
@@ -12,5 +20,70 @@
     <!-- link my js -->
     <script type="module" src="js/main.js"></script>
   </head>
-  <body></body>
+  <body class="flex-column">
+    <header>Library</header>
+
+    <main>
+      <form action="" class="flex-row" novalidate>
+        <section class="bookName-div">
+          <label for="bookName">Book</label>
+          <div class="input-div">
+            <i class="fa-solid fa-book"></i>
+            <input
+              type="text"
+              id="bookName"
+              name="bookName"
+              placeholder="Kinh Van Hoa"
+              required
+            />
+          </div>
+        </section>
+        <section class="author-div">
+          <label for="author">Author</label>
+          <div class="input-div">
+            <i class="fa-solid fa-user"></i>
+            <input
+              type="text"
+              id="author"
+              name="author"
+              placeholder="Nguyen Nhat Anh"
+              required
+            />
+          </div>
+        </section>
+        <section class="status-div">
+          <label for="status">Status</label>
+          <div class="input-div">
+            <i class="fa-solid fa-circle-check"></i>
+            <select name="" id="status" name="status" required>
+              <option value="unread" selected>Unread</option>
+              <option value="read">Read</option>
+            </select>
+          </div>
+        </section>
+      </form>
+      <section class="grid-column"></section>
+      <table>
+        <thead>
+          <th>Name</th>
+          <th>Author</th>
+          <th>Status</th>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </main>
+
+    <footer class="flex-row">
+      <p>
+        Copyright ©
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://vietducng.github.io/"
+          >Viet Nguyen</a
+        >
+        2025
+      </p>
+    </footer>
+  </body>
 </html>
