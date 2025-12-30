@@ -50,7 +50,7 @@ function clearAllValidation(){
 
 function checkBookName(bookName) {
     const string = bookName.value.trim();
-    if (string && !string.match(BOOK_NAME_REGEX)) {
+    if (string && !BOOK_NAME_REGEX.test(string)) {
         setInvalid(bookName, 'Enter a valid book name')
         return false;
     } else if (string) {
@@ -61,7 +61,7 @@ function checkBookName(bookName) {
 
 function checkAuthor(author) {
     const string = author.value.trim();
-    if (string && !string.match(AUTHOR_REGEX)){
+    if (string && !AUTHOR_REGEX.test(string)){
         setInvalid(author, 'Enter a valid author name');
         return false;
     } else if (string) {
