@@ -6,7 +6,6 @@ const authorInput = document.querySelector('#author');
 const statusInput = document.querySelector('#status');
 const errors = document.querySelectorAll('.error');
 const inputDivs = document.querySelectorAll('.input-div');
-const requiredInputs = document.querySelectorAll('input[required]')
 const successMsg = document.querySelector('.success-msg');
 
 // deal with focus style for input-div
@@ -46,41 +45,39 @@ function clearAllValidation(){
     inputDivs.forEach(div => div.classList.remove('invalid','valid'));
 }
 
-let valid = true;
-
 function checkBookName(bookName) {
     const string = bookName.value.trim();
     if (string && !string.match(/^[\p{L}\p{N}][\p{L}\p{N} .,:;'"!?()\-–—]{1,149}$/u)) {
         setInvalid(bookName, 'Enter a valid book name')
-        valid=false;
-    } else if (string) setValid(bookName);
+        return false;
+    } else if (string) {
+        setValid(bookName);
+        return true
+    }
 }
 
 function checkAuthor(author) {
     const string = author.value.trim();
     if (string && !string.match(/^[\p{L}][\p{L} '-]{1,29}$/u)){
         setInvalid(author, 'Enter a valid author name');
-        valid=false;
-    } else if (string) setValid(author);
+        return false;
+    } else if (string) {
+        setValid(author);
+        return true;
+    }
 }
 
 function checkEmpty(input) {
     if (input.value.trim()==='') {
         setInvalid(input, '*This field is required')
-        valid=false;
-    }
-}
-
-function applyCheckEmpty(){
-    requiredInputs.forEach(input => checkEmpty(input));
+        return false;
+    } else return true;
 }
 
 function reset() {
-    if (valid) {
-        clearAllValidation();
-        successMsg.textContent = 'New book was added!';
-        form.reset();
-    }
+    clearAllValidation();
+    successMsg.textContent = 'New book was added!';
+    form.reset();
 }
 
 nameInput.addEventListener('input', ()=>{
@@ -126,11 +123,12 @@ function createDefaultBooks() {
 submitBtn.addEventListener('click', (e)=>{
     e.preventDefault();
     clearAllValidation();
-    valid=true;
-    checkBookName(nameInput);
-    checkAuthor(authorInput);
-    applyCheckEmpty();
-    if (valid) {
+    const isValid =
+    checkBookName(nameInput) && 
+    checkAuthor(authorInput) &&
+    checkEmpty(nameInput) && 
+    checkEmpty(authorInput)
+    if (isValid) {
         addBookToLibrary(nameInput.value,authorInput.value,statusInput.value)
         reset();
     }
