@@ -133,7 +133,7 @@ function createDefaultBooks() {
     addBookToLibrary('Dreamy Eye', 'Nguyen Nhat Anh', 'true')
 }
 
-submitBtn.addEventListener('click', (e)=>{
+form.addEventListener('submit', (e)=>{
     e.preventDefault();
     clearAllValidation();
 
