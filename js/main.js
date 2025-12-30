@@ -1,9 +1,99 @@
+const form = document.querySelector('form');
 const tableBody = document.querySelector('table tbody');
 const submitBtn = document.querySelector('.submit-btn');
 const nameInput = document.querySelector('#bookName');
 const authorInput = document.querySelector('#author');
 const statusInput = document.querySelector('#status');
+const errors = document.querySelectorAll('.error');
+const inputDivs = document.querySelectorAll('.input-div');
+const requiredInputs = document.querySelectorAll('input[required]')
+const successMsg = document.querySelector('.success-msg');
 
+// deal with focus style for input-div
+inputDivs.forEach(div => div.addEventListener('click',()=>{
+    const input = div.querySelector('input');
+    if (input) {
+        input.focus();
+        div.classList.add('focus');
+    };
+}))
+
+document.addEventListener('click', (e)=>{
+    inputDivs.forEach(div => {
+        if (!div.contains(e.target)) div.classList.remove('focus');
+    });
+});
+
+// form validation
+function setInvalid(input, msg){
+    input.parentElement.parentElement.querySelector('.error').textContent = msg;
+    input.parentElement.classList.add('invalid');
+}
+
+function setValid(input){
+    input.parentElement.classList.add('valid');
+}
+
+function clearValidation(input){
+    const error = input.parentElement.parentElement.querySelector('.error');
+    error.textContent = '';
+    input.parentElement.classList.remove('invalid', 'valid');
+}
+
+function clearAllValidation(){
+    errors.forEach(error => error.textContent = '');
+    successMsg.textContent = '';
+    inputDivs.forEach(div => div.classList.remove('invalid','valid'));
+}
+
+let valid = true;
+
+function checkBookName(bookName) {
+    const string = bookName.value.trim();
+    if (string && !string.match(/^[\p{L}\p{N}][\p{L}\p{N} .,:;'"!?()\-–—]{1,149}$/u)) {
+        setInvalid(bookName, 'Enter a valid book name')
+        valid=false;
+    } else if (string) setValid(bookName);
+}
+
+function checkAuthor(author) {
+    const string = author.value.trim();
+    if (string && !string.match(/^[\p{L}][\p{L} '-]{1,29}$/u)){
+        setInvalid(author, 'Enter a valid author name');
+        valid=false;
+    } else if (string) setValid(author);
+}
+
+function checkEmpty(input) {
+    if (input.value.trim()==='') {
+        setInvalid(input, '*This field is required')
+        valid=false;
+    }
+}
+
+function applyCheckEmpty(){
+    requiredInputs.forEach(input => checkEmpty(input));
+}
+
+function reset() {
+    if (valid) {
+        clearAllValidation();
+        successMsg.textContent = 'New book was added!';
+        form.reset();
+    }
+}
+
+nameInput.addEventListener('input', ()=>{
+    clearValidation(nameInput);
+    checkBookName(nameInput);
+})
+
+authorInput.addEventListener('input', ()=>{
+    clearValidation(authorInput);
+    checkAuthor(authorInput);
+})
+
+// data
 let library = [];
 
 function Book(name,author,status) {
@@ -35,7 +125,15 @@ function createDefaultBooks() {
 
 submitBtn.addEventListener('click', (e)=>{
     e.preventDefault();
-    addBookToLibrary(nameInput.value,authorInput.value,statusInput.value)
+    clearAllValidation();
+    valid=true;
+    checkBookName(nameInput);
+    checkAuthor(authorInput);
+    applyCheckEmpty();
+    if (valid) {
+        addBookToLibrary(nameInput.value,authorInput.value,statusInput.value)
+        reset();
+    }
     displayBooks();
 })
 
