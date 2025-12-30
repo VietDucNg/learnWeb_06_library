@@ -93,12 +93,15 @@ authorInput.addEventListener('input', ()=>{
 // data
 let library = [];
 
-function Book(name,author,status) {
-    this.id = crypto.randomUUID();
-    this.name = name;
-    this.author = author;
-    this.status = status;
+class Book {
+    constructor(name, author, isRead) {
+        this.id = crypto.randomUUID();
+        this.name = name;
+        this.author = author;
+        this.isRead = isRead;
+    }
 }
+
 
 function isDuplicate(name,author) {
     const normalizedName = name.trim().toLowerCase();
