@@ -102,16 +102,14 @@ authorInput.addEventListener('input', ()=>{
 
 // data
 let library = [];
-
 class Book {
-    constructor(name, author, isRead) {
+    constructor(name, author, status) {
         this.id = crypto.randomUUID();
         this.name = name;
         this.author = author;
-        this.isRead = isRead;
+        this.status = status;
     }
 }
-
 
 function isDuplicate(name,author) {
     const normalizedName = name.trim().toLowerCase();
@@ -123,7 +121,8 @@ function isDuplicate(name,author) {
 }
 
 function addBookToLibrary(name,author,status) {
-    const newBook = new Book(name,author,status);
+    const isRead = status === 'true';
+    const newBook = new Book(name,author,isRead);
     if (!isDuplicate(name,author)) library.push(newBook);
 }
 
@@ -133,33 +132,17 @@ function createDefaultBooks() {
     addBookToLibrary('Dreamy Eye', 'Nguyen Nhat Anh', 'true')
 }
 
-form.addEventListener('submit', (e)=>{
-    e.preventDefault();
-    clearAllValidation();
-
-    const isValid =
-    checkBookName(nameInput) && 
-    checkAuthor(authorInput)
-    applyCheckEmpty();
-
-    if (isValid) {
-        addBookToLibrary(nameInput.value,authorInput.value,statusInput.value)
-        reset();
-    }
-    displayBooks();
-})
-
 function delBook(book,tr) {
     library = library.filter(eachBook => eachBook.id !== book.id);
     tr.remove();
 }
 
 function changeStatus(book,statusBtn) {
-    if (book.status === 'true') {
-        book.status = 'false';
+    if (book.status) {
+        book.status = false;
         statusBtn.textContent = 'Unread';
     } else {
-        book.status = 'true';
+        book.status = true;
         statusBtn.textContent = 'Read';
     }
 }
@@ -168,7 +151,7 @@ function createTableData(book,tr,cellType) {
     const td = document.createElement('td');
     if (cellType === 'status') {
         const statusBtn = document.createElement('button');
-        const status = (book.status === 'true')? 'Read' : 'Unread';
+        const status = (book.status)? 'Read' : 'Unread';
         statusBtn.textContent = status;
         statusBtn.addEventListener('click', ()=>changeStatus(book,statusBtn));
         td.appendChild(statusBtn);
@@ -194,6 +177,22 @@ function displayBooks() {
         createTableData(book,tr,'delBtn');
     }
 }
+
+form.addEventListener('submit', (e)=>{
+    e.preventDefault();
+    clearAllValidation();
+
+    const isValid =
+    checkBookName(nameInput) && 
+    checkAuthor(authorInput)
+    applyCheckEmpty();
+
+    if (isValid) {
+        addBookToLibrary(nameInput.value,authorInput.value,statusInput.value)
+        reset();
+    }
+    displayBooks();
+})
 
 window.addEventListener('load', ()=> {
     createDefaultBooks();
