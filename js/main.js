@@ -139,11 +139,11 @@ submitBtn.addEventListener('click', (e)=>{
     checkAuthor(authorInput) &&
     checkEmpty(nameInput) && 
     checkEmpty(authorInput)
+    applyCheckEmpty();
     if (isValid) {
         addBookToLibrary(nameInput.value,authorInput.value,statusInput.value)
         reset();
     }
-    applyCheckEmpty();
     displayBooks();
 })
 
