@@ -13,9 +13,18 @@ function Book(name,author,status) {
     this.status = status;
 }
 
+function isDuplicate(name,author) {
+    const normalizedName = name.trim().toLowerCase();
+    const normalizedAuthor = author.trim().toLowerCase();
+    return library.some(book =>
+        book.name.trim().toLowerCase() === normalizedName &&
+        book.author.trim().toLowerCase() === normalizedAuthor
+    );
+}
+
 function addBookToLibrary(name,author,status) {
     const newBook = new Book(name,author,status);
-    library.push(newBook);
+    if (!isDuplicate(name,author)) library.push(newBook);
 }
 
 function createDefaultBooks() {
