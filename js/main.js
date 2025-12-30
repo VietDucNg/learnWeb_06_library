@@ -108,7 +108,10 @@ class Book {
         this.name = name;
         this.author = author;
         this.status = status;
-    }
+    };
+    toggleStatus(){
+        this.status = !this.status;
+    };
 }
 
 function isDuplicate(name,author) {
@@ -138,13 +141,8 @@ function delBook(book,tr) {
 }
 
 function changeStatus(book,statusBtn) {
-    if (book.status) {
-        book.status = false;
-        statusBtn.textContent = 'Unread';
-    } else {
-        book.status = true;
-        statusBtn.textContent = 'Read';
-    }
+    book.toggleStatus();
+    statusBtn.textContent = (book.status === true)? 'Read' : 'Unread';
 }
 
 function createTableData(book,tr,cellType) {
