@@ -8,6 +8,9 @@ const errors = document.querySelectorAll('.error');
 const inputDivs = document.querySelectorAll('.input-div');
 const successMsg = document.querySelector('.success-msg');
 
+const BOOK_NAME_REGEX = /^[\p{L}\p{N}][\p{L}\p{N} .,:;'"!?()\-–—]{1,149}$/u;
+const AUTHOR_REGEX = /^[\p{L}][\p{L} '-]{1,29}$/u;
+
 // deal with focus style for input-div
 inputDivs.forEach(div => div.addEventListener('click',()=>{
     const input = div.querySelector('input');
@@ -47,7 +50,7 @@ function clearAllValidation(){
 
 function checkBookName(bookName) {
     const string = bookName.value.trim();
-    if (string && !string.match(/^[\p{L}\p{N}][\p{L}\p{N} .,:;'"!?()\-–—]{1,149}$/u)) {
+    if (string && !string.match(BOOK_NAME_REGEX)) {
         setInvalid(bookName, 'Enter a valid book name')
         return false;
     } else if (string) {
@@ -58,7 +61,7 @@ function checkBookName(bookName) {
 
 function checkAuthor(author) {
     const string = author.value.trim();
-    if (string && !string.match(/^[\p{L}][\p{L} '-]{1,29}$/u)){
+    if (string && !string.match(AUTHOR_REGEX)){
         setInvalid(author, 'Enter a valid author name');
         return false;
     } else if (string) {
