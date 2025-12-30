@@ -35,17 +35,28 @@ function delBook(book,tr) {
     tr.remove();
 }
 
+function changeStatus(book,statusBtn) {
+    if (book.status === 'true') {
+        book.status = 'false';
+        statusBtn.textContent = 'Unread';
+    } else {
+        book.status = 'true';
+        statusBtn.textContent = 'Read';
+    }
+}
+
 function createTableData(book,tr,cellType) {
     const td = document.createElement('td');
     if (cellType === 'status') {
         const statusBtn = document.createElement('button');
         const status = (book.status === 'true')? 'Read' : 'Unread';
         statusBtn.textContent = status;
+        statusBtn.addEventListener('click', ()=>changeStatus(book,statusBtn));
         td.appendChild(statusBtn);
     } else if (cellType === 'delBtn') {
         const delBtn = document.createElement('button');
-        delBtn.addEventListener('click', ()=>delBook(book, tr));
         delBtn.textContent = 'REMOVE';
+        delBtn.addEventListener('click', ()=>delBook(book, tr));
         td.appendChild(delBtn);
     } else {
         td.textContent = book[cellType];
