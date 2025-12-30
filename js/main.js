@@ -6,6 +6,7 @@ const authorInput = document.querySelector('#author');
 const statusInput = document.querySelector('#status');
 const errors = document.querySelectorAll('.error');
 const inputDivs = document.querySelectorAll('.input-div');
+const requiredInputs = document.querySelectorAll('input[required]');
 const successMsg = document.querySelector('.success-msg');
 
 const BOOK_NAME_REGEX = /^[\p{L}\p{N}][\p{L}\p{N} .,:;'"!?()\-–—]{1,149}$/u;
@@ -77,6 +78,10 @@ function checkEmpty(input) {
     } else return true;
 }
 
+function applyCheckEmpty(){
+    requiredInputs.forEach(input => checkEmpty(input))
+}
+
 function reset() {
     clearAllValidation();
     successMsg.textContent = 'New book was added!';
@@ -138,6 +143,7 @@ submitBtn.addEventListener('click', (e)=>{
         addBookToLibrary(nameInput.value,authorInput.value,statusInput.value)
         reset();
     }
+    applyCheckEmpty();
     displayBooks();
 })
 
@@ -191,5 +197,4 @@ window.addEventListener('load', ()=> {
     createDefaultBooks();
     console.log(library);
     displayBooks();
-    
 })
