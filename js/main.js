@@ -30,17 +30,27 @@ submitBtn.addEventListener('click', (e)=>{
     displayBooks();
 })
 
+function delBook(book,tr) {
+    library = library.filter(eachBook => eachBook.id !== book.id);
+    tr.remove();
+}
+
 function createTableData(book,tr,cellType) {
     const td = document.createElement('td');
     if (cellType === 'status') {
         const statusBtn = document.createElement('button');
         const status = (book.status === 'true')? 'Read' : 'Unread';
         statusBtn.textContent = status;
-        tr.appendChild(statusBtn);
+        td.appendChild(statusBtn);
+    } else if (cellType === 'delBtn') {
+        const delBtn = document.createElement('button');
+        delBtn.addEventListener('click', ()=>delBook(book, tr));
+        delBtn.textContent = 'REMOVE';
+        td.appendChild(delBtn);
     } else {
         td.textContent = book[cellType];
-        tr.appendChild(td);
     }
+    tr.appendChild(td);
 }
 
 function displayBooks() {
@@ -50,7 +60,8 @@ function displayBooks() {
         tableBody.appendChild(tr);
         createTableData(book,tr,'name');
         createTableData(book,tr,'author');
-        createTableData(book,tr,'status')
+        createTableData(book,tr,'status');
+        createTableData(book,tr,'delBtn');
     }
 }
 
