@@ -90,11 +90,13 @@ function reset() {
 
 nameInput.addEventListener('input', ()=>{
     clearValidation(nameInput);
+    successMsg.textContent = '';
     checkBookName(nameInput);
 })
 
 authorInput.addEventListener('input', ()=>{
     clearValidation(authorInput);
+    successMsg.textContent = '';
     checkAuthor(authorInput);
 })
 
@@ -134,12 +136,12 @@ function createDefaultBooks() {
 submitBtn.addEventListener('click', (e)=>{
     e.preventDefault();
     clearAllValidation();
+
     const isValid =
     checkBookName(nameInput) && 
-    checkAuthor(authorInput) &&
-    checkEmpty(nameInput) && 
-    checkEmpty(authorInput)
+    checkAuthor(authorInput)
     applyCheckEmpty();
+
     if (isValid) {
         addBookToLibrary(nameInput.value,authorInput.value,statusInput.value)
         reset();
