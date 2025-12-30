@@ -1,4 +1,8 @@
 const tableBody = document.querySelector('table tbody');
+const submitBtn = document.querySelector('.submit-btn');
+const nameInput = document.querySelector('#bookName');
+const authorInput = document.querySelector('#author');
+const statusInput = document.querySelector('#status');
 
 let library = [];
 
@@ -15,16 +19,22 @@ function addBookToLibrary(name,author,status) {
 }
 
 function createDefaultBooks() {
-    addBookToLibrary('Kinh Van Hoa', 'Nguyen Nhat Anh', true);
-    addBookToLibrary('How to Win Friends and Influence People', 'Dale Carnegie', false);
-    addBookToLibrary('Dreamy Eye', 'Nguyen Nhat Anh', true)
+    addBookToLibrary('Kinh Van Hoa', 'Nguyen Nhat Anh', 'true');
+    addBookToLibrary('How to Win Friends and Influence People', 'Dale Carnegie', 'false');
+    addBookToLibrary('Dreamy Eye', 'Nguyen Nhat Anh', 'true')
 }
+
+submitBtn.addEventListener('click', (e)=>{
+    e.preventDefault();
+    addBookToLibrary(nameInput.value,authorInput.value,statusInput.value)
+    displayBooks();
+})
 
 function createTableData(book,tr,cellType) {
     const td = document.createElement('td');
     if (cellType === 'status') {
         const statusBtn = document.createElement('button');
-        const status = (book.status === true)? 'Read' : 'Unread';
+        const status = (book.status === 'true')? 'Read' : 'Unread';
         statusBtn.textContent = status;
         tr.appendChild(statusBtn);
     } else {
@@ -34,6 +44,7 @@ function createTableData(book,tr,cellType) {
 }
 
 function displayBooks() {
+    tableBody.replaceChildren();
     for (const book of library) {
         const tr = document.createElement('tr');
         tableBody.appendChild(tr);
