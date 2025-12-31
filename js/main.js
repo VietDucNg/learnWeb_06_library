@@ -1,107 +1,38 @@
+import { 
+    checkBookName,
+    checkAuthor,
+    applyCheckEmpty,
+    clearAllValidation,
+    reset
+ } from "./form.js";
+
 const form = document.querySelector('form');
-const tableBody = document.querySelector('table tbody');
-const submitBtn = document.querySelector('.submit-btn');
 const nameInput = document.querySelector('#bookName');
 const authorInput = document.querySelector('#author');
 const statusInput = document.querySelector('#status');
-const errors = document.querySelectorAll('.error');
-const inputDivs = document.querySelectorAll('.input-div');
-const requiredInputs = document.querySelectorAll('input[required]');
-const successMsg = document.querySelector('.success-msg');
+const tableBody = document.querySelector('table tbody');
 
-const BOOK_NAME_REGEX = /^[\p{L}\p{N}][\p{L}\p{N} .,:;'"!?()\-–—]{1,149}$/u;
-const AUTHOR_REGEX = /^[\p{L}][\p{L} '-]{1,29}$/u;
-
-// deal with focus style for input-div
-inputDivs.forEach(div => div.addEventListener('click',()=>{
-    const input = div.querySelector('input');
-    if (input) {
-        input.focus();
-        div.classList.add('focus');
-    };
-}))
-
-document.addEventListener('click', (e)=>{
-    inputDivs.forEach(div => {
-        if (!div.contains(e.target)) div.classList.remove('focus');
-    });
-});
-
-// form validation
-function setInvalid(input, msg){
-    input.parentElement.parentElement.querySelector('.error').textContent = msg;
-    input.parentElement.classList.add('invalid');
-}
-
-function setValid(input){
-    input.parentElement.classList.add('valid');
-}
-
-function clearValidation(input){
-    const error = input.parentElement.parentElement.querySelector('.error');
-    error.textContent = '';
-    input.parentElement.classList.remove('invalid', 'valid');
-}
-
-function clearAllValidation(){
-    errors.forEach(error => error.textContent = '');
-    successMsg.textContent = '';
-    inputDivs.forEach(div => div.classList.remove('invalid','valid'));
-}
-
-function checkBookName(bookName) {
-    const string = bookName.value.trim();
-    if (string && !BOOK_NAME_REGEX.test(string)) {
-        setInvalid(bookName, 'Enter a valid book name')
-        return false;
-    } else if (string) {
-        setValid(bookName);
-        return true
-    }
-}
-
-function checkAuthor(author) {
-    const string = author.value.trim();
-    if (string && !AUTHOR_REGEX.test(string)){
-        setInvalid(author, 'Enter a valid author name');
-        return false;
-    } else if (string) {
-        setValid(author);
-        return true;
-    }
-}
-
-function checkEmpty(input) {
-    if (input.value.trim()==='') {
-        setInvalid(input, '*This field is required')
-        return false;
-    } else return true;
-}
-
-function applyCheckEmpty(){
-    requiredInputs.forEach(input => checkEmpty(input))
-}
-
-function reset() {
-    clearAllValidation();
-    successMsg.textContent = 'New book was added!';
-    form.reset();
-}
-
-nameInput.addEventListener('input', ()=>{
-    clearValidation(nameInput);
-    successMsg.textContent = '';
-    checkBookName(nameInput);
-})
-
-authorInput.addEventListener('input', ()=>{
-    clearValidation(authorInput);
-    successMsg.textContent = '';
-    checkAuthor(authorInput);
-})
-
-// data
 let library = [];
+
+const STORAGE_KEY = 'library';
+
+function saveLibrary() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(library));
+}
+
+function loadLibrary() {
+    const data = localStorage.getItem(STORAGE_KEY);
+    if (!data) return false;
+
+    library = JSON.parse(data).map( b => {
+        const book = new Book(b.name, b.author, b.status);
+        book.id = b.id;
+        return book
+    });
+
+    return true;
+}
+
 class Book {
     constructor(name, author, status) {
         this.id = crypto.randomUUID();
@@ -126,7 +57,10 @@ function isDuplicate(name,author) {
 function addBookToLibrary(name,author,status) {
     const isRead = status === 'true';
     const newBook = new Book(name,author,isRead);
-    if (!isDuplicate(name,author)) library.push(newBook);
+    if (!isDuplicate(name,author)) {
+        library.push(newBook);
+        saveLibrary();
+    }
 }
 
 function createDefaultBooks() {
@@ -169,11 +103,13 @@ function displayBooks() {
 function delBook(book,tr) {
     library = library.filter(b => b.id !== book.id);
     tr.remove();
+    saveLibrary();
 }
 
 function changeStatus(book,statusBtn) {
     book.toggleStatus();
     statusBtn.textContent = (book.status === true)? 'Read' : 'Unread';
+    saveLibrary();
 }
 
 function handelTableClick(e){
@@ -206,7 +142,13 @@ form.addEventListener('submit', (e)=>{
     displayBooks();
 })
 
-window.addEventListener('load', ()=> {
-    createDefaultBooks();
+window.addEventListener('load', () => {
+    const loaded = loadLibrary();
+
+    if (!loaded) {
+        createDefaultBooks();
+        saveLibrary();
+    }
+
     displayBooks();
-})
+});
