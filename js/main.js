@@ -135,28 +135,17 @@ function createDefaultBooks() {
     addBookToLibrary('Dreamy Eye', 'Nguyen Nhat Anh', 'true')
 }
 
-function delBook(book,tr) {
-    library = library.filter(eachBook => eachBook.id !== book.id);
-    tr.remove();
-}
-
-function changeStatus(book,statusBtn) {
-    book.toggleStatus();
-    statusBtn.textContent = (book.status === true)? 'Read' : 'Unread';
-}
-
 function createTableData(book,tr,cellType) {
     const td = document.createElement('td');
     if (cellType === 'status') {
         const statusBtn = document.createElement('button');
-        const status = (book.status)? 'Read' : 'Unread';
-        statusBtn.textContent = status;
-        statusBtn.addEventListener('click', ()=>changeStatus(book,statusBtn));
+        statusBtn.classList.add('status-btn');
+        statusBtn.textContent = (book.status)? 'Read' : 'Unread';        
         td.appendChild(statusBtn);
     } else if (cellType === 'delBtn') {
         const delBtn = document.createElement('button');
+        delBtn.classList.add('del-btn');
         delBtn.textContent = 'REMOVE';
-        delBtn.addEventListener('click', ()=>delBook(book, tr));
         td.appendChild(delBtn);
     } else {
         td.textContent = book[cellType];
@@ -168,6 +157,7 @@ function displayBooks() {
     tableBody.replaceChildren();
     for (const book of library) {
         const tr = document.createElement('tr');
+        tr.dataset.id = book.id;
         tableBody.appendChild(tr);
         createTableData(book,tr,'name');
         createTableData(book,tr,'author');
@@ -175,6 +165,30 @@ function displayBooks() {
         createTableData(book,tr,'delBtn');
     }
 }
+
+function delBook(book,tr) {
+    library = library.filter(b => b.id !== book.id);
+    tr.remove();
+}
+
+function changeStatus(book,statusBtn) {
+    book.toggleStatus();
+    statusBtn.textContent = (book.status === true)? 'Read' : 'Unread';
+}
+
+function handelTableClick(e){
+    const button = e.target.closest('button');
+    if (!button) return;
+
+    const row = button.closest('tr');
+    const bookID = row.dataset.id;
+    const book = library.find(b => b.id === bookID);
+
+    if (button.classList.contains('status-btn')) changeStatus(book, button);
+    if (button.classList.contains('del-btn')) delBook(book, row);
+}
+
+tableBody.addEventListener('click', handelTableClick);
 
 form.addEventListener('submit', (e)=>{
     e.preventDefault();
@@ -194,6 +208,5 @@ form.addEventListener('submit', (e)=>{
 
 window.addEventListener('load', ()=> {
     createDefaultBooks();
-    console.log(library);
     displayBooks();
 })
