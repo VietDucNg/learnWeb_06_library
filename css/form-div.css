@@ -1,0 +1,83 @@
+.form-div {
+  border: 1px solid var(--border-color);
+  padding: 1rem;
+  border-radius: 10px;
+  background-color: var(--background-brighter-color);
+}
+
+form {
+    grid-template-columns: 3fr 3fr 1fr 150px;
+    gap: 1rem;
+}
+
+.bookName-div:hover, 
+.author-div:hover, 
+.status-div:hover,
+label {
+  cursor: pointer;
+}
+
+.input-div {
+  margin-top: 5px;
+  border: 1px solid var(--border-color);
+  padding: 0.5rem;
+  border-radius: 5px;
+  background-color: var(--background-color);
+}
+
+input, select {
+  border: none;
+  background:none;
+  outline: none;
+}
+
+label, table {
+  color: var(--font-brighter-color);
+}
+
+option {
+  background-color: var(--background-brighter-color);
+}
+
+input {
+  color: var(--font-brighter-color);
+}
+
+select {
+  color: var(--font-color);
+}
+
+.submit-div {
+    align-items: center;
+    gap: 5px;
+}
+
+.success-msg {
+  text-align: center;
+  color: rgb(0, 184, 0)
+}
+
+.submit-btn { 
+  border-radius: 10px;
+  background:
+    linear-gradient(135deg, #70578f, #39356a);
+  color: white;
+  width: max-content;
+}
+
+.submit-btn:hover {
+  transform: translateY(-1px);
+}
+
+.submit-btn:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+small {
+  height: 3rem;
+}
+
+.search-div {
+    grid-template-columns: 1fr 150px;
+    gap: 1rem;
+}

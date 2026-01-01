@@ -15,8 +15,8 @@
     />
     <!-- link my css -->
     <link rel="stylesheet" href="css/reset.css" />
-    <link rel="stylesheet" href="css/backbone.css" />
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/form-div.css" />
     <!-- link my js -->
     <script type="module" src="js/form.js"></script>
     <script type="module" src="js/main.js"></script>
@@ -44,66 +44,64 @@
     <main class="flex-column">
       <header><h2>My Library</h2></header>
 
-      <section class="form-div">
-        <div class="input-container">
-          <form action="" id="book-form" novalidate>
-            <section class="bookName-div">
-              <label for="bookName"><h5>Book</h5></label>
-              <div class="input-div">
-                <i class="fa-solid fa-book"></i>
-                <input
-                  type="text"
-                  id="bookName"
-                  name="bookName"
-                  placeholder="Kinh Van Hoa"
-                  required
-                />
-              </div>
-              <small class="error"></small>
-            </section>
-
-            <section class="author-div">
-              <label for="author"><h5>Author</h5></label>
-              <div class="input-div">
-                <i class="fa-solid fa-user"></i>
-                <input
-                  type="text"
-                  id="author"
-                  name="author"
-                  placeholder="Nguyen Nhat Anh"
-                  required
-                />
-              </div>
-              <small class="error"></small>
-            </section>
-
-            <section class="status-div">
-              <label for="status"><h5>Status</h5></label>
-              <div class="input-div">
-                <i class="fa-solid fa-circle-check"></i>
-                <select name="" id="status" name="status" required>
-                  <option value="false" selected>Unread</option>
-                  <option value="true">Read</option>
-                </select>
-              </div>
-            </section>
-
-            <section class="submit-div">
-              <button class="submit-btn" type="submit" form="book-form">
-                + Add Book
-              </button>
-              <small class="success-msg"></small>
-            </section>
-          </form>
-
-          <section class="search-div">
+      <section class="form-div grid-row">
+        <form action="" id="book-form" class="grid-column" novalidate>
+          <section class="bookName-div">
+            <label for="bookName"><h5>Book</h5></label>
             <div class="input-div">
-              <i class="fa-solid fa-magnifying-glass"></i>
-              <input type="text" placeholder=" Search books..." />
+              <i class="fa-solid fa-book"></i>
+              <input
+                type="text"
+                id="bookName"
+                name="bookName"
+                placeholder="Kinh Van Hoa"
+                required
+              />
             </div>
-            <button>Filter</button>
+            <small class="error"></small>
           </section>
-        </div>
+
+          <section class="author-div">
+            <label for="author"><h5>Author</h5></label>
+            <div class="input-div">
+              <i class="fa-solid fa-user"></i>
+              <input
+                type="text"
+                id="author"
+                name="author"
+                placeholder="Nguyen Nhat Anh"
+                required
+              />
+            </div>
+            <small class="error"></small>
+          </section>
+
+          <section class="status-div">
+            <label for="status"><h5>Status</h5></label>
+            <div class="input-div">
+              <i class="fa-solid fa-circle-check"></i>
+              <select name="" id="status" name="status" required>
+                <option value="false" selected>Unread</option>
+                <option value="true">Read</option>
+              </select>
+            </div>
+          </section>
+
+          <section class="submit-div flex-column">
+            <button class="submit-btn" type="submit" form="book-form">
+              + Add Book
+            </button>
+            <small class="success-msg"></small>
+          </section>
+        </form>
+
+        <section class="search-div grid-column">
+          <div class="input-div">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" placeholder=" Search books..." />
+          </div>
+          <button><i class="fa-solid fa-filter"></i> Filter</button>
+        </section>
       </section>
 
       <table>
