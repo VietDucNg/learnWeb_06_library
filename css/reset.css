@@ -9,7 +9,6 @@
 }
 
 html {
-    font-size: 16px;
     scroll-behavior: smooth;
     /* Prevent font size inflation */
     -moz-text-size-adjust: none;
@@ -17,13 +16,11 @@ html {
     text-size-adjust: none;
 }
 
-/* Set core body defaults */
 body {
     font-family: "Roboto", sans-serif;
     background-color: #fff;
-    color: #333;
     width: 100vw;
-    height: 100vh;
+    height: 100%ưèưeưe;
     min-height: 100vh;
     line-height: 1.5;
 }

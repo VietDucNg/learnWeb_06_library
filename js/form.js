@@ -11,7 +11,7 @@ const AUTHOR_REGEX = /^[\p{L}][\p{L} '-]{1,29}$/u;
 
 // deal with focus style for input-div
 inputDivs.forEach(div => div.addEventListener('click',()=>{
-    const input = div.querySelector('input');
+    const input = div.querySelector('input, select');
     if (input) {
         input.focus();
         div.classList.add('focus');

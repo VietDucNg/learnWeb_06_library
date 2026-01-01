@@ -20,57 +20,92 @@
     <!-- link my js -->
     <script type="module" src="js/form.js"></script>
     <script type="module" src="js/main.js"></script>
+    <script type="module" src="js/style.js"></script>
   </head>
-  <body class="flex-column">
-    <header>Library</header>
+  <body class="grid-column">
+    <aside class="flex-column">
+      <header>
+        <h1><i class="fa-solid fa-book" style="color: #463172"></i>Library</h1>
+      </header>
+      <p>
+        ©
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://vietducng.github.io/"
+          >Viet Nguyen</a
+        >
+        2025
+      </p>
+      <button><i class="fa-regular fa-folder-open"></i> My library</button>
+      <button><i class="fa-solid fa-gear"></i> Settings</button>
+    </aside>
 
-    <main>
-      <form action="" class="flex-row" novalidate>
-        <section class="bookName-div">
-          <label for="bookName">Book</label>
-          <div class="input-div">
-            <i class="fa-solid fa-book"></i>
-            <input
-              type="text"
-              id="bookName"
-              name="bookName"
-              placeholder="Kinh Van Hoa"
-              required
-            />
-          </div>
-          <small class="error"></small>
-        </section>
+    <main class="flex-column">
+      <header><h2>My Library</h2></header>
 
-        <section class="author-div">
-          <label for="author">Author</label>
-          <div class="input-div">
-            <i class="fa-solid fa-user"></i>
-            <input
-              type="text"
-              id="author"
-              name="author"
-              placeholder="Nguyen Nhat Anh"
-              required
-            />
-          </div>
-          <small class="error"></small>
-        </section>
+      <section class="form-div">
+        <div class="input-container">
+          <form action="" id="book-form" novalidate>
+            <section class="bookName-div">
+              <label for="bookName"><h5>Book</h5></label>
+              <div class="input-div">
+                <i class="fa-solid fa-book"></i>
+                <input
+                  type="text"
+                  id="bookName"
+                  name="bookName"
+                  placeholder="Kinh Van Hoa"
+                  required
+                />
+              </div>
+              <small class="error"></small>
+            </section>
 
-        <section class="status-div">
-          <label for="status">Status</label>
-          <div class="input-div">
-            <i class="fa-solid fa-circle-check"></i>
-            <select name="" id="status" name="status" required>
-              <option value="false" selected>Unread</option>
-              <option value="true">Read</option>
-            </select>
-          </div>
-        </section>
-        <button class="submit-btn" type="submit">Submit</button>
-        <small class="success-msg"></small>
-      </form>
+            <section class="author-div">
+              <label for="author"><h5>Author</h5></label>
+              <div class="input-div">
+                <i class="fa-solid fa-user"></i>
+                <input
+                  type="text"
+                  id="author"
+                  name="author"
+                  placeholder="Nguyen Nhat Anh"
+                  required
+                />
+              </div>
+              <small class="error"></small>
+            </section>
 
-      <section class="grid-column"></section>
+            <section class="status-div">
+              <label for="status"><h5>Status</h5></label>
+              <div class="input-div">
+                <i class="fa-solid fa-circle-check"></i>
+                <select name="" id="status" name="status" required>
+                  <option value="false" selected>Unread</option>
+                  <option value="true">Read</option>
+                </select>
+              </div>
+            </section>
+
+            <section class="submit-div">
+              <button class="submit-btn" type="submit" form="book-form">
+                + Add Book
+              </button>
+              <small class="success-msg"></small>
+            </section>
+          </form>
+
+          <section class="search-div">
+            <div class="input-div">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input type="text" placeholder=" Search books..." />
+            </div>
+            <button>Filter</button>
+          </section>
+        </div>
+      </section>
+
       <table>
         <thead>
           <th>Name</th>
@@ -81,18 +116,5 @@
         <tbody></tbody>
       </table>
     </main>
-
-    <footer class="flex-row">
-      <p>
-        Copyright ©
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://vietducng.github.io/"
-          >Viet Nguyen</a
-        >
-        2025
-      </p>
-    </footer>
   </body>
 </html>

@@ -2,6 +2,33 @@
   --font-size-base: clamp(14px, 0.4vw + 1rem, 18px);
   --space: 1lh;
   --font-family-base: system-ui, "Segoe UI", Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans",  Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol","Noto Color Emoji";
+  --background-color: #18171f;
+  --background-brighter-color: #272438;
+  --font-color:#a6a4ab;
+  --font-brighter-color: #d2d1da;
+  --icon-color:#5a5866;
+  --border-color: #49484b5c;
+}
+
+.grid-column {
+    display: grid;
+    grid-auto-flow: column;
+}
+
+.grid-row {
+    display: grid;
+    grid-auto-flow: row;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.flex-row {
+    display: flex;
+    flex-wrap: wrap;
 }
 
 html {
@@ -9,10 +36,25 @@ html {
 }
 
 body {
+    grid-template-columns: minmax(150px,1fr) minmax(350px,3fr);
+}
+
+body, button {
   font-family: var(--font-family-base);
-  margin: 0;
-  padding: 0;
-  color: #222;
+  color: var(--font-color);
+  /* background-color: var(--background-color); */
+  background:
+  radial-gradient(
+      1200px 600px at 10% -10%,
+      rgba(88, 101, 242, 0.05),
+      transparent 40%
+    ),
+    radial-gradient(
+      1000px 500px at 90% 10%,
+      rgba(34, 211, 238, 0.02),
+      transparent 45%
+    ),
+    linear-gradient(180deg, var(--background-brighter-color), var(--background-color));
 }
 
 h1,h2,h3,h4,h5,h6 {
@@ -21,11 +63,15 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 h1 {
+  display: inline;
   font-size: clamp(2.2rem, 1.5vw + 1.5rem, 3.2rem);
+  color: var(--font-brighter-color);
 }
 
 h2 {
   font-size: clamp(1.8rem, 1.2vw + 1.2rem, 2.6rem);
+  color: var(--font-brighter-color);
+  padding-bottom: 2rem;
 }
 
 h3 {
@@ -37,6 +83,7 @@ h4 {
 }
 
 h5 {
+  margin-left: 10px;
   font-size: clamp(1.1rem, 0.5vw + 0.8rem, 1.4rem);
 }
 
@@ -52,3 +99,140 @@ p {
 article {
   max-width: 70ch;
 }
+
+aside {
+  padding: 10%;
+  gap: 0.5rem;
+  border-right: 1px solid var(--border-color);
+}
+
+aside header {
+  padding-bottom: 10%;
+  border-bottom: 1px solid var(--border-color);;
+}
+
+aside p, button {
+    text-align: left;
+    padding: 1rem;
+    border-radius: 5px;
+    background: none;
+}
+
+i {
+  color: var(--icon-color);
+  opacity: 1;
+}
+
+button:hover {
+  color: var(--font-brighter-color);
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+aside button:hover, aside button.clicked,
+aside button:hover i, aside button.clicked i {
+  color: var(--font-brighter-color);
+  background-color: var(--background-brighter-color);
+}
+
+button,
+button i {
+  transition: all 0.1s ease;
+}
+
+main{
+  padding: 2rem 4rem;
+}
+
+.form-div {
+  border: 1px solid var(--border-color);
+  padding: 1rem;
+  border-radius: 10px;
+  background-color: var(--background-brighter-color);
+}
+
+.bookName-div:hover, 
+.author-div:hover, 
+.status-div:hover,
+label {
+  cursor: pointer;
+}
+
+.input-div {
+  margin-top: 5px;
+  border: 1px solid var(--border-color);
+  padding: 0.5rem;
+  border-radius: 5px;
+  background-color: var(--background-color);
+}
+
+input, select {
+  border: none;
+  background:none;
+  outline: none;
+}
+
+label, table {
+  color: var(--font-brighter-color);
+}
+
+option {
+  background-color: var(--background-brighter-color);
+}
+
+input {
+  color: var(--font-brighter-color);
+}
+
+select {
+  color: var(--font-color);
+}
+
+.focus {
+  border: 1px solid #1a82f2bf;
+}
+
+.invalid {
+  border: 1px solid rgb(255, 0, 0,0.5);
+}
+
+.valid {
+  border: 1px solid rgb(0, 255, 0, 0.5)
+}
+
+.error {
+  color: red;
+}
+
+.success-msg {
+  text-align: center;
+  color: rgb(0, 184, 0)
+}
+
+.submit-div {
+  align-items: center;
+  justify-content: space-between;
+}
+
+.submit-btn { 
+  border-radius: 10px;
+  background:
+    linear-gradient(135deg, #70578f, #39356a);
+  color: white;
+  width: max-content;
+}
+
+.submit-btn:hover {
+  transform: translateY(-1px);
+}
+
+.submit-btn:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+small {
+  height: 3rem;
+}
+
