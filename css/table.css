@@ -1,0 +1,58 @@
+table {
+    border: 1px solid var(--border-color);
+    padding: 0 1rem;
+}
+
+table thead tr{
+    padding: 1rem 0.5rem;
+    grid-template-columns: 4fr 3fr 1fr 1fr;
+    gap: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+table tbody tr {
+    padding: 0 0.5rem;
+    display: grid;
+    grid-template-columns: 4fr 3fr 1fr 1fr;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 10px 0;
+}
+
+table th,
+table td {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+table tbody tr td:nth-last-child(1),
+table tbody tr td:nth-last-child(2){
+    text-align: center;
+}
+
+/* see long text on hover */
+td:hover {
+  overflow: visible;
+  background: #1f1f2e;
+}
+
+.status-btn, .del-btn{
+    padding: 5px 10px;
+}
+
+.status-btn {
+    background: var(--button-status-color);
+}
+
+.status-btn:hover {
+  background: var(--button-status-brighter-color);
+}
+
+.del-btn {
+    background-color: var(--buton-del-color);
+}
+
+.del-btn:hover {
+    background-color: var(--buton-del-brighter-color);
+}

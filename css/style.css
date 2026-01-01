@@ -8,6 +8,10 @@
   --font-brighter-color: #d2d1da;
   --icon-color:#5a5866;
   --border-color: #49484b5c;
+  --button-status-color: #2b3136;
+  --button-status-brighter-color: #323a40;
+  --buton-del-color: #38262c;
+  --buton-del-brighter-color: #422c33;
 }
 
 .grid-column {
@@ -42,7 +46,7 @@ body {
 body, button {
   font-family: var(--font-family-base);
   color: var(--font-color);
-  /* background-color: var(--background-color); */
+
   background:
   radial-gradient(
       1200px 600px at 10% -10%,
@@ -55,7 +59,17 @@ body, button {
       transparent 45%
     ),
     linear-gradient(180deg, var(--background-brighter-color), var(--background-color));
+    transition: all 0.1 ease;
 }
+
+button:hover {
+  transform: translateY(-1px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
 
 h1,h2,h3,h4,h5,h6 {
   font-weight: 700;
@@ -144,6 +158,11 @@ button i {
 
 main{
   padding: 2rem 4rem;
+  gap: 2rem;
+}
+
+.credit {
+  align-self:center;
 }
 
 .focus {
