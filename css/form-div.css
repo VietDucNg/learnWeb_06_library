@@ -81,3 +81,11 @@ small {
     grid-template-columns: 1fr 150px;
     gap: 1rem;
 }
+
+.filter-btn {
+    border-radius: 5px;
+    background-color: var(--background-color);
+    text-align: center;
+    width: max-content;
+    justify-self: center;
+}
