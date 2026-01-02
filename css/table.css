@@ -104,3 +104,8 @@ dialog::backdrop {
     margin-top: 10px;
     padding: 5px 15px;
 }
+
+.delAll-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}

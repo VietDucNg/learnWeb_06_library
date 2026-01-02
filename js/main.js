@@ -11,6 +11,7 @@ const nameInput = document.querySelector('#bookName');
 const authorInput = document.querySelector('#author');
 const statusInput = document.querySelector('#status');
 const tableBody = document.querySelector('table tbody');
+const delAllBtn = document.querySelector('.delAll-btn');
 
 let library = [];
 
@@ -101,9 +102,14 @@ function displayBooks() {
     }
 }
 
+function disableDelAllBtn() {
+    delAllBtn.disabled = library.length === 0;
+}
+
 function delBook(book,tr) {
     library = library.filter(b => b.id !== book.id);
     tr.remove();
+    disableDelAllBtn();
     saveLibrary();
 }
 
@@ -162,4 +168,4 @@ window.addEventListener('load', () => {
     displayBooks();
 });
 
-export {delAllBook};
+export {delAllBook, disableDelAllBtn};
