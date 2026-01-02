@@ -41,18 +41,26 @@ td:hover {
     padding: 5px 10px;
 }
 
-.status-btn {
-    background: var(--button-status-color);
+.read {
+    background-color: var(--btn-read-color);
 }
 
-.status-btn:hover {
-  background: var(--button-status-brighter-color);
+.read:hover {
+    background-color: var(--btn-read-brighter-color);
+}
+
+.unread {
+    background-color: var(--btn-unread-color);
+}
+
+.unread:hover {
+    background-color: var(--btn-unread-brighter-color);
 }
 
 .del-btn {
-    background-color: var(--buton-del-color);
+    background-color: var(--btn-del-color);
 }
 
 .del-btn:hover {
-    background-color: var(--buton-del-brighter-color);
+    background-color: var(--btn-del-brighter-color);
 }

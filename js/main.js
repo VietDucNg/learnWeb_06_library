@@ -74,7 +74,8 @@ function createTableData(book,tr,cellType) {
     if (cellType === 'status') {
         const statusBtn = document.createElement('button');
         statusBtn.classList.add('status-btn');
-        statusBtn.textContent = (book.status)? 'Read' : 'Unread';        
+        statusBtn.textContent = (book.status)? 'Read' : 'Unread';
+        statusBtn.classList.add((book.status)? 'read' : 'unread');
         td.appendChild(statusBtn);
     } else if (cellType === 'delBtn') {
         const delBtn = document.createElement('button');
@@ -109,6 +110,8 @@ function delBook(book,tr) {
 function changeStatus(book,statusBtn) {
     book.toggleStatus();
     statusBtn.textContent = (book.status === true)? 'Read' : 'Unread';
+    statusBtn.classList.remove('read','unread');
+    statusBtn.classList.add((book.status) ? 'read' : 'unread')
     saveLibrary();
 }
 

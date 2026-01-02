@@ -2,16 +2,18 @@
   --font-size-base: clamp(14px, 0.4vw + 1rem, 18px);
   --space: 1lh;
   --font-family-base: system-ui, "Segoe UI", Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans",  Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol","Noto Color Emoji";
-  --background-color: #18171f;
-  --background-brighter-color: #272438;
+  --bg-color: #18171f;
+  --bg-brighter-color: #272438;
   --font-color:#a6a4ab;
   --font-brighter-color: #d2d1da;
   --icon-color:#5a5866;
   --border-color: #49484b5c;
-  --button-status-color: #2b3136;
-  --button-status-brighter-color: #323a40;
-  --buton-del-color: #38262c;
-  --buton-del-brighter-color: #422c33;
+  --btn-read-color: #41505c;
+  --btn-read-brighter-color: #485d6d;
+  --btn-unread-color: #2b3136;
+  --btn-unread-brighter-color: #323a40;
+  --btn-del-color: #38262c;
+  --btn-del-brighter-color: #422c33;
 }
 
 .grid-column {
@@ -58,7 +60,7 @@ body, button {
       rgba(34, 211, 238, 0.02),
       transparent 45%
     ),
-    linear-gradient(180deg, var(--background-brighter-color), var(--background-color));
+    linear-gradient(180deg, var(--bg-brighter-color), var(--bg-color));
     transition: all 0.1 ease;
 }
 
@@ -148,7 +150,7 @@ button:active {
 aside button:hover, aside button.clicked,
 aside button:hover i, aside button.clicked i {
   color: var(--font-brighter-color);
-  background-color: var(--background-brighter-color);
+  background-color: var(--bg-brighter-color);
 }
 
 button,
