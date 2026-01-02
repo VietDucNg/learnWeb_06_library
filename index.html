@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="css/style.css" />
     <!-- link my js -->
     <script type="module" src="js/form.js"></script>
+    <script type="module" src="js/removeAllBtn.js"></script>
     <script type="module" src="js/main.js"></script>
     <script type="module" src="js/style.js"></script>
   </head>
@@ -129,5 +130,19 @@
         2025
       </p>
     </main>
+
+    <dialog class="delAll-dialog">
+      <form method="dialog" class="dialog-content">
+        <h3>Remove all books?</h3>
+
+        <p>This action will permanently delete all books from your library.</p>
+
+        <div class="dialog-actions">
+          <button value="cancel" class="candel-btn">Cancel</button>
+
+          <button value="confirm" class="delConfirm-btn">Remove All</button>
+        </div>
+      </form>
+    </dialog>
   </body>
 </html>

@@ -11,7 +11,6 @@ const nameInput = document.querySelector('#bookName');
 const authorInput = document.querySelector('#author');
 const statusInput = document.querySelector('#status');
 const tableBody = document.querySelector('table tbody');
-const delAllBtn = document.querySelector('.delAll-btn');
 
 let library = [];
 
@@ -108,6 +107,12 @@ function delBook(book,tr) {
     saveLibrary();
 }
 
+function delAllBook() {
+    library = [];
+    localStorage.removeItem(STORAGE_KEY);
+    displayBooks();
+}
+
 function changeStatus(book,statusBtn) {
     book.toggleStatus();
     statusBtn.textContent = (book.status === true)? 'Read' : 'Unread';
@@ -146,14 +151,6 @@ form.addEventListener('submit', (e)=>{
     displayBooks();
 })
 
-function delAllBook() {
-    library = [];
-    localStorage.removeItem(STORAGE_KEY);
-    displayBooks();
-}
-
-delAllBtn.addEventListener('click', delAllBook);
-
 window.addEventListener('load', () => {
     const loaded = loadLibrary();
 
@@ -164,3 +161,5 @@ window.addEventListener('load', () => {
 
     displayBooks();
 });
+
+export {delAllBook};
