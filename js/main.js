@@ -11,6 +11,7 @@ const nameInput = document.querySelector('#bookName');
 const authorInput = document.querySelector('#author');
 const statusInput = document.querySelector('#status');
 const tableBody = document.querySelector('table tbody');
+const delAllBtn = document.querySelector('.delAll-btn');
 
 let library = [];
 
@@ -144,6 +145,14 @@ form.addEventListener('submit', (e)=>{
     }
     displayBooks();
 })
+
+function delAllBook() {
+    library = [];
+    localStorage.removeItem(STORAGE_KEY);
+    displayBooks();
+}
+
+delAllBtn.addEventListener('click', delAllBook);
 
 window.addEventListener('load', () => {
     const loaded = loadLibrary();

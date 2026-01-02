@@ -37,7 +37,7 @@ td:hover {
   background: #1f1f2e;
 }
 
-.status-btn, .del-btn{
+.status-btn, .del-btn, .delAll-btn{
     padding: 5px 10px;
 }
 
@@ -57,10 +57,10 @@ td:hover {
     background-color: var(--btn-unread-brighter-color);
 }
 
-.del-btn {
+.del-btn, .delAll-btn {
     background-color: var(--btn-del-color);
 }
 
-.del-btn:hover {
+.del-btn:hover, .delAll-btn {
     background-color: var(--btn-del-brighter-color);
 }
