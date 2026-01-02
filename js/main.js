@@ -111,6 +111,7 @@ function delBook(book,tr) {
     tr.remove();
     disableDelAllBtn();
     saveLibrary();
+    if (library.length === 0) delAllBook();
 }
 
 function delAllBook() {
